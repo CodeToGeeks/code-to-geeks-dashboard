@@ -1,0 +1,16 @@
+/* sidebar */
+
+.sider {
+  background-color: white !important;
+  font-size: 1.1rem !important;
+  overflow: auto !important;
+  height: 100vh !important;
+}
+
+.sider li {
+  margin: 20px 0px !important;
+
+  font-size: 1.1rem;
+}
+
+/* https://ant.design/components/layout/ */
