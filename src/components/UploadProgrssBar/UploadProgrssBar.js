@@ -8,7 +8,7 @@ function getProgressBarConfig(
 ) {
   const props = {
     name: "file",
-    action: "http://localhost:4000/api/v1/file",
+    action: "https://codetogeeksapi.herokuapp.com/api/v1/file",
     headers: {
       "x-auth-token": localStorage.getItem("token"),
     },
