@@ -6,7 +6,7 @@ import Login from "./components/pages/Login/Login";
 import Home from "./components/pages/Home/Home";
 import configAxios from "./config/configAxiosDefultValues";
 import Files from "./components/pages/Files/Files";
-
+import Account from './components/pages/account/Account'
 import Posts from "./components/pages/posts/Posts";
 import CreatePost from "./components/pages/posts/Create/Create";
 import EditPost from "./components/pages/posts/EditPost/EditPost";
@@ -46,6 +46,8 @@ function App() {
                   <Route path="/tags/create" element={<CreateTag />} />
                   <Route path="/tags/edit/:id" element={<EditTag />} />
                   <Route path="/files" element={<Files />} />
+                  <Route path="/account" element={<Account />} />
+                  
                   <Route path="/signin" element={<Login />} />
                 </Routes>
               </div>

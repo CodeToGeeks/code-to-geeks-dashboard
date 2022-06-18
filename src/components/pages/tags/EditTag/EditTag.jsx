@@ -11,6 +11,7 @@ import { updateTag } from "../../../../store/tags/tagsSlice";
 import tagAction from "../../../../store/tags/tagsSlice";
 import oneTagAction from "./../../../../store/tags/oneTagSlice";
 import { Sketch } from "@uiw/react-color";
+
 const EditTag = () => {
   const { TextArea } = Input;
   let { id } = useParams();

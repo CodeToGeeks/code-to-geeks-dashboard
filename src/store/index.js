@@ -5,6 +5,7 @@ import post from "./posts/onePostSlice";
 import tags from "./tags/tagsSlice";
 import tag from "./tags/oneTagSlice";
 import files from "./files/filesSlice";
+import account from "./account/accountSlice"
 export default configureStore({
   reducer: {
     auth: auth.reducer,
@@ -13,5 +14,6 @@ export default configureStore({
     tags: tags.reducer,
     tag: tag.reducer,
     files: files.reducer,
+    account:account.reducer
   },
 });

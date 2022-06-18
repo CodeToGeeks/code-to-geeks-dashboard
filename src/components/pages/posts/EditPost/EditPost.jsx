@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from "react";
 import classes from "./EditPost.module.css";
+import { resetCoverImage,uploadPostCoverImage } from "../../../../api/post";
 import { customTools } from "../../../../utils/customMdEditor";
 import MDEditor from "@uiw/react-md-editor";
 import { useDispatch, useSelector } from "react-redux";
 import rehypeSanitize from "rehype-sanitize";
-import { SaveOutlined } from "@ant-design/icons";
+import {
+  SaveOutlined,
+  CloseOutlined,
+  ArrowUpOutlined,
+} from "@ant-design/icons";
 import {
   Select,
   Row,
   Col,
+  Upload,
   Divider,
   Input,
   Button,
   Space,
   Tag,
   Spin,
-  Switch 
+  Image,
+  Switch,
 } from "antd";
 import Notification from "../../../Notification";
 import { useNavigate, useParams } from "react-router-dom";
@@ -37,7 +44,7 @@ const EditPost = () => {
   const [contentValue, setcontentValue] = useState("");
   const [choosedTags, setchoosedTags] = useState([]);
   const [publishState, setPublishState] = useState();
-
+  const [coverImage, setCoverImage] = useState(null);
   const { isAuth } = useSelector((state) => state.auth);
   const getPostResponse = useSelector((state) => state.post);
   const updatePostResponse = useSelector((state) => state.posts);
@@ -53,9 +60,12 @@ const EditPost = () => {
   };
 
   const handleOnChangePublishState = () => {
-   
     setPublishState(!publishState);
-    console.log(publishState)
+  };
+  const handleResetCoverImage = async () => {
+    const result = await resetCoverImage(id);
+    Notification(result.state, "Posts Notification", result.message);
+    if (result.state === "success") setCoverImage(null);
   };
 
   const handleBackToPosts = () => {
@@ -74,6 +84,7 @@ const EditPost = () => {
 
   useEffect(() => {
     if (getPostResponse.post) {
+      setCoverImage(getPostResponse.post.cover_image_link);
       setTitle(getPostResponse.post.title);
       setSlug(getPostResponse.post.slug);
       setcontentValue(getPostResponse.post.md);
@@ -156,7 +167,7 @@ const EditPost = () => {
         excerpt,
         md: contentValue,
         tags: choosedTags,
-        published :publishState
+        published: publishState,
       },
     };
     dispatch(updatePost(postData));
@@ -197,17 +208,6 @@ const EditPost = () => {
           </Col>
         </Row>
 
-
-
-
-
-
-
-
-
-
-
-
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
           <Col className="gutter-row" span={12}>
             <Divider orientation="left">Post Excerpt</Divider>
@@ -242,20 +242,53 @@ const EditPost = () => {
           </Col>
         </Row>
 
-        
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+          <Col className="gutter-row" span={12}>
+            <Divider orientation="center">Cover Image</Divider>
+
+            <Space size="large">
+              {coverImage && (
+                <Image width={200} height={100} src={coverImage} />
+              )}
+
+              <Button
+                danger
+                // type="danger"
+                className={classes.createBtn}
+                icon={<CloseOutlined />}
+                onClick={handleResetCoverImage}
+              >
+                Reset
+              </Button>
+
+
+              <Upload {...uploadPostCoverImage(id, setCoverImage)} >
+          
+          <Button
+                type="primary"
+                className={classes.createBtn}
+                icon={<ArrowUpOutlined />}
+            
+              >
+                {coverImage ? "Change" : "Add"}
+              </Button>
+        </Upload>
+            
+            </Space>
+          </Col>
           <Col className="gutter-row" span={12}>
             <div>
               <Divider orientation="center">Publish State</Divider>
-              <Switch checkedChildren="Published" 
-              checked={publishState} 
-              unCheckedChildren="Unpublished" defaultChecked onChange = { handleOnChangePublishState } />
-             
+              <Switch
+                checkedChildren="Published"
+                checked={publishState}
+                unCheckedChildren="Unpublished"
+                defaultChecked
+                onChange={handleOnChangePublishState}
+              />
             </div>
           </Col>
         </Row>
-
-
 
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
           <Col className="gutter-row" span={24}>
