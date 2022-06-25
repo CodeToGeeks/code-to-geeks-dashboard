@@ -27,9 +27,14 @@ const Login = () => {
   };
 
   return (
+
+
+
     <div className={classes.signInForm}>
       <Spin tip="Loading..." spinning={isLoading}>
-        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+
+        
+        <Row>
           <Col className="gutter-row" span={24}>
             <div className={classes.typewriter}>
               <h1>WELCOME FOR YOU IN CODE TO GEEKS ADMIN DASHBOARD.</h1>
@@ -37,7 +42,8 @@ const Login = () => {
           </Col>
         </Row>
         <Divider orientation="center"></Divider>
-        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+  
+        <Row >
           <Col className="gutter-row" span={12} offset={5}>
             <Form
               labelCol={{

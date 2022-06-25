@@ -2,7 +2,7 @@ import axios from "axios";
 import Notification from "../components/Notification";
 export const resetCoverImage = async (_id) => {
   try {
-    const res = await axios.post(`https://codetogeeksapi.herokuapp.com/post/cover/image/reset/${_id}`);
+    const res = await axios.post(`/post/cover/image/reset/${_id}`);
 
     return { state: "success", message: res.data.message };
   } catch (err) {
@@ -13,7 +13,7 @@ export const resetCoverImage = async (_id) => {
 export function  uploadPostCoverImage (_id,setCoverImage) {
   const props = {
     name: "file",
-    action: `https://codetogeeksapi.herokuapp.com/api/v1/post/cover/image/${_id}`,
+    action: `http://localhost:4000/api/v1/post/cover/image/${_id}`,
     
     headers: {
       "x-auth-token": localStorage.getItem("token"),

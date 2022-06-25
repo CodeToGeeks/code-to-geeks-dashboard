@@ -1,6 +1,7 @@
 {
   "name": "code-to-geeks-dashboard",
   "version": "0.1.0",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
@@ -26,7 +27,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
- 
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
