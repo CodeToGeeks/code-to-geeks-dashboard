@@ -1,0 +1,16 @@
+/**
+ - delete comp.jsx from components after finshe
+ * 
+ * 
+ */
+
+
+/*
+filter after delete may be we will need this in future
+ /*   if (result.deleted === true)
+          setDataSource((pre) => {
+            return pre.filter((post) => post._id !== _id);
+          });*/
+
+
+*/

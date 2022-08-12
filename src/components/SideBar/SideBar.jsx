@@ -42,6 +42,13 @@ const items = [
       <i className="fa-solid fa-folder-open"></i>
     </Link>
   ),
+  getItem(
+    "Api logs",
+    "5",
+    <Link className={classes.sideItem} to="/api/logs">
+      <i class="fa-solid fa-file-waveform"></i>
+    </Link>
+  ),
 ];
 
 export default function SideBar() {

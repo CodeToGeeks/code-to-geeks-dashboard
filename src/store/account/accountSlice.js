@@ -9,7 +9,7 @@ export const getAccount = createAsyncThunk(
   const { rejectWithValue } = thunkAPI;
   try {
     let response = await axios.get("/account");
-    return { account: response.data.accountData };
+    return { account: response.data.payload };
   } catch (err) {
     return rejectWithValue({ message:err.message});
   }

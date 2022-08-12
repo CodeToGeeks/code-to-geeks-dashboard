@@ -3,8 +3,6 @@ import axios from "axios";
 import { handleAuthJwt } from "../services/auth/Auth";
 
 export const signOut = () => {
-  // localStorage.removeItem("user");
-  // localStorage.removeItem("token");
   localStorage.clear("");
 };
 let reload = false;
@@ -22,7 +20,7 @@ export const signIn = createAsyncThunk(
     const { rejectWithValue } = thunkAPI;
     try {
       let response = await axios.post("/auth/signin", accountData);
-      await handleAuthJwt(response.data.token);
+      await handleAuthJwt(response.data.payload.token);
       return { user: localStorage.getItem("user"), message: "succes signIn" };
     } catch (err) {
       let result = err.message;

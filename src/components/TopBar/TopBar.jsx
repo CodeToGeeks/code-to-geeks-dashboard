@@ -27,9 +27,10 @@ const TopBar = () => {
   }, [dispatch]);
 
   useEffect(() => {
+
     if (getAccountResponse.account) {
-      setAccountImage(getAccountResponse.account.profile_image_link);
-      setAccountFirstName(getAccountResponse.account.first_name);
+      setAccountImage(getAccountResponse.account.profileImageLink);
+      setAccountFirstName(getAccountResponse.account.firstName);
     }
   }, [getAccountResponse]);
 
@@ -57,15 +58,15 @@ const TopBar = () => {
             </Badge>
 
             <Space>
-              <Space style={{ gap: "1px" }}>
+              <Space >
                 <Link
                   to={{
                     pathname: '/account',
                   }}
-                  title="Review Post"
+                  title={accountFirstName + ' account'}
                 >
                   <Avatar
-                    alt="affdgfh "
+                    alt={accountFirstName}
                     src={accountImage}
                     size={39}
                     style={{

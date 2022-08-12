@@ -112,7 +112,6 @@ const postsSlice = createSlice({
       state.message = null;
       state.deleted = null;
       state.updated = null;
-      state.inserted = null;
       state.created = null;
     },
   },

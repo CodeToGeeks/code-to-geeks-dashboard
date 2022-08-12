@@ -1,0 +1,63 @@
+
+.postCover {
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  justify-self: right;
+}
+
+.postCover img {
+  border-radius: 30%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+
+/* create button */
+/* ******************************** */
+
+.createBtnDiv {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.createBtn {
+  position: fixed;
+  z-index: 999;
+  right: 1rem;
+  top: 4.6rem;
+
+  width: 50px;
+  height: 50px;
+  border-radius: 1.875rem;
+
+  background-size: 1.125rem 1.125rem;
+
+  font-size: 22px;
+  letter-spacing: 1.3px;
+  font-weight: 900;
+
+  background: #1890ff;
+
+  border: none;
+  border-radius: 1000px;
+  box-shadow: 12px 12px 24px rgba(90, 209, 197, 0.80);
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+  outline: none;
+
+}
+
+.createBtn:hover,
+.createBtn:focus {
+  transform: translateY(-6px);
+}
+

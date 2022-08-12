@@ -13,7 +13,8 @@ export const resetCoverImage = async (_id) => {
 export function  uploadPostCoverImage (_id,setCoverImage) {
   const props = {
     name: "file",
-    action: `http://localhost:4000/api/v1/post/cover/image/${_id}`,
+  
+    action: `http://157.175.208.59/api/v1/post/cover/image/${_id}`,
     
     headers: {
       "x-auth-token": localStorage.getItem("token"),

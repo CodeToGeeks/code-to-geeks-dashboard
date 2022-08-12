@@ -1,9 +1,11 @@
 import axios from "axios";
 
 const configAxios = () => {
-  axios.defaults.baseURL = process.env.API_URL || "http://localhost:4000/api/v1";
+  axios.defaults.baseURL = "http://localhost:4000/api/v1/"
   
-  // "https://codetogeeksapi.herokuapp.com/api/v1";
+  // "http://localhost:4000/api/v1/";
+  
+  // "http://157.175.208.59/api/v1/"  
   //
   axios.defaults.timeout = 5000;
 };

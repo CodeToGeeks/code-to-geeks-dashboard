@@ -1,11 +1,28 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+
 /**
- * @get all posts action
+ * @get all tags action
+ */
+ export const getAllTags = createAsyncThunk(
+  "tags/getAllTags",
+  async (params, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      let response = await axios.get("/tag?pageNumber=1&pageSize=1500", );
+      return { tags: response.data.tags};
+    } catch (err) {
+      return rejectWithValue({ message: err.message });
+    }
+  }
+);
+
+/**
+ * @get page tags action
  */
 export const getTags = createAsyncThunk(
-  "tags/getAll",
+  "tags/getPageTags",
   async (params, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
@@ -68,15 +85,15 @@ export const updateTag = createAsyncThunk(
 );
 
 /**
- * @delete post action
+ * @delete tag action
  */
-/*export const deleteTag = createAsyncThunk(
-  "posts/deleteTag",
+export const deleteTag = createAsyncThunk(
+  "tags/deleteTag",
   async (_id, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      await axios.delete(`/post/${_id}`);
-      return { message: "Post deleted Success", _id };
+      await axios.delete(`/tag/${_id}`);
+      return { message: "Tag deleted Success", _id };
     } catch (err) {
       let result = err.message;
       try {
@@ -91,7 +108,7 @@ export const updateTag = createAsyncThunk(
     }
   }
 );
-*/
+
 const initialState = {
   tags: [],
   total: 0,
@@ -102,6 +119,7 @@ const initialState = {
   message: null,
   isLoading: false,
   isError: false,
+  allTags:[]
 };
 
 const tagsSlice = createSlice({
@@ -119,22 +137,38 @@ const tagsSlice = createSlice({
   extraReducers: {
     // get all posts
 
-    [getTags.pending]: (state, action) => {
+    [getAllTags.pending]: (state, action) => {
       state.isLoading = true;
       state.isError = false;
     },
-    [getTags.fulfilled]: (state, action) => {
+    [getAllTags.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.tags = action.payload.tags;
-      state.total = action.payload.total;
+      state.allTags = action.payload.tags;
     },
-    [getTags.rejected]: (state, action) => {
+    [getAllTags.rejected]: (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.message = action.payload.message;
-      state.tags = [];
-      state.total = 0;
+      state.allTags = [];
     },
+ // get page tags
+
+ [getTags.pending]: (state, action) => {
+  state.isLoading = true;
+  state.isError = false;
+},
+[getTags.fulfilled]: (state, action) => {
+  state.isLoading = false;
+  state.tags = action.payload.tags;
+  state.total = action.payload.total;
+},
+[getTags.rejected]: (state, action) => {
+  state.isLoading = false;
+  state.isError = true;
+  state.message = action.payload.message;
+  state.tags = [];
+  state.total = 0;
+},
 
     // create tag
 
@@ -169,7 +203,7 @@ const tagsSlice = createSlice({
       state.isError = true;
       state.message = action.payload.message;
     },
-    /*
+   
     // delete tag
 
     [deleteTag.pending]: (state, action) => {
@@ -179,8 +213,8 @@ const tagsSlice = createSlice({
     [deleteTag.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.message = action.payload.message;
-      state.posts = state.posts.filter(
-        (post) => post._id !== action.payload._id
+      state.tags = state.tags.filter(
+        (tag) => tag._id !== action.payload._id
       );
       state.total = state.total - 1;
       state.deleted = true;
@@ -189,7 +223,7 @@ const tagsSlice = createSlice({
       state.isLoading = false;
       state.isError = true;
       state.message = action.payload.message;
-    },*/
+    },
   },
 });
 

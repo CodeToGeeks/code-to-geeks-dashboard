@@ -2,30 +2,43 @@ import { Routes, Route } from "react-router-dom";
 import { Layout } from "antd";
 import TopBar from "./components/TopBar/TopBar";
 import SideBar from "./components/SideBar/SideBar";
-import Login from "./components/pages/Login/Login";
-import Home from "./components/pages/Home/Home";
+import Login from "./pages/Login/Login";
+import Home from "./pages/Home/Home";
 import configAxios from "./config/configAxiosDefultValues";
-import Files from "./components/pages/Files/Files";
-import Account from './components/pages/account/Account'
-import Posts from "./components/pages/posts/Posts";
-import CreatePost from "./components/pages/posts/Create/Create";
-import EditPost from "./components/pages/posts/EditPost/EditPost";
-import ReviewPost from "./components/pages/posts/ReviewPost/ReviewPost";
+import Files from "./pages/Files/Files";
+import Account from "./pages/account/Account";
+import Logs from "./pages/Logs/Logs"
+import Posts from "./pages/posts/Posts";
+import CreatePost from "./pages/posts/Create/Create";
+import EditPost from "./pages/posts/EditPost/EditPost";
+import ReviewPost from "./pages/posts/ReviewPost/ReviewPost";
 
-import Tags from "./components/pages/tags/Tags";
-import EditTag from "./components/pages/tags/EditTag/EditTag";
-import CreateTag from "./components/pages/tags/Create/Create";
-import { getAllTagsAndSaveInLocalstorge } from "./api/tags";
+import Tags from "./pages/tags/Tags";
+import EditTag from "./pages/tags/EditTag/EditTag";
+import CreateTag from "./pages/tags/Create/Create";
 import "./App.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+
+import { getAllTags } from "./store/tags/tagsSlice";
 const { Content } = Layout;
 
-configAxios();
-getAllTagsAndSaveInLocalstorge();
-function App() {
-  document.title = "CODETOGEEKS";
-  const { isAuth } = useSelector((state) => state.auth);
+/* 
+  "homepage": "./",
 
+*/
+configAxios();
+function App() {
+  document.title = "codetogeeks";
+  const { isAuth } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isAuth) {
+      dispatch(getAllTags());
+    }
+  }, [isAuth, dispatch]);
+  // get all tags
   return (
     <div className="App">
       <Layout>
@@ -47,8 +60,9 @@ function App() {
                   <Route path="/tags/edit/:id" element={<EditTag />} />
                   <Route path="/files" element={<Files />} />
                   <Route path="/account" element={<Account />} />
-                  
+                  <Route path="/api/logs" element={<Logs />} />
                   <Route path="/signin" element={<Login />} />
+                  <Route path="*" element={<Login />} />
                 </Routes>
               </div>
             </Content>
@@ -60,3 +74,5 @@ function App() {
 }
 
 export default App;
+
+// element={<EditPost currentId={currentId} />}
