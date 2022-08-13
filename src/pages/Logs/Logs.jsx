@@ -32,7 +32,7 @@ const Logs = () => {
   );
 
   const showLogDetails = (data) => {
-    const { description, log_type,path } = data;
+    const { description, log_type, path } = data;
 
     switch (log_type) {
       case "error":
@@ -54,11 +54,11 @@ const Logs = () => {
         });
         break;
       default:
-        case "other":
-          Modal.info({
-            title: `This is a other log from path : ${path}`,
-            content: `Description:  ${description}`,
-          });
+      case "other":
+        Modal.info({
+          title: `This is a other log from path : ${path}`,
+          content: `Description:  ${description}`,
+        });
     }
   };
 
@@ -95,14 +95,35 @@ const Logs = () => {
       title: "Description",
       dataIndex: "description",
       key: "description",
-      width: "50%",
+      width: "35%",
       render: (text, record) => (
         <Tag
           color={log_color[record.log_type]}
           style={{ width: "100%", fontSize: "1rem" }}
           key={record._id}
         >
-          {text.substring(0, 85)}
+          {text.substring(0, 75)}
+        </Tag>
+      ),
+    },
+    {
+      title: "Time",
+      dataIndex: "created_at",
+      key: "created_at",
+      width: "15%",
+      render: (text, record) => (
+        <Tag
+          color={log_color[record.log_type]}
+          style={{ width: "100%", fontSize: "1rem" }}
+          key={record._id}
+        >
+          {new Date(text).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
         </Tag>
       ),
     },

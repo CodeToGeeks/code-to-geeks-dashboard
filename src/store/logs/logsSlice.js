@@ -10,7 +10,6 @@ export const getLogs = createAsyncThunk(
     const { rejectWithValue } = thunkAPI;
     try {
       let response = await axios.get("/sys/log", { params: params });
-      console.log(response.data)
       return { logs: response.data.payload.logs, total: response.data.payload.total };
     } catch (err) {
       return rejectWithValue({ message: err.message });

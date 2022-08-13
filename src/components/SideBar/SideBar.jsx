@@ -46,7 +46,7 @@ const items = [
     "Api logs",
     "5",
     <Link className={classes.sideItem} to="/api/logs">
-      <i class="fa-solid fa-file-waveform"></i>
+      <i className="fa-solid fa-file-waveform"></i>
     </Link>
   ),
 ];

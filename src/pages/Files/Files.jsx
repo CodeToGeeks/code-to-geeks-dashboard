@@ -13,6 +13,7 @@ import {
 } from "antd";
 import Notification from "../../components/Notification";
 import fileType from "../../utils/urlTypes";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import {
   DeleteTwoTone,
   EditTwoTone,
@@ -144,14 +145,13 @@ const Files = () => {
     dispatch(downloadFile({ url, fileName }));
   }
 
-  async function handleCopyUrl(fileLink) {
-    navigator.clipboard.writeText(fileLink);
+  const handleCopyUrlNotification = async () => {
     Notification(
       "success",
       "Copy Notification",
       "File URL copied to clipboard 👍😊"
     );
-  }
+  };
 
   function handleDelete(_id) {
     confirm({
@@ -233,10 +233,13 @@ const Files = () => {
             onClick={() => handleDelete(record._id)}
           />
 
-          <CopyTwoTone
-            style={{ fontSize: "25px" }}
-            onClick={() => handleCopyUrl(record.file_link)}
-          />
+          <CopyToClipboard
+            text={record.file_link}
+            onCopy={handleCopyUrlNotification}
+          >
+            <CopyTwoTone style={{ fontSize: "25px" }} />
+          </CopyToClipboard>
+
           <DownloadOutlined
             style={{ fontSize: "25px" }}
             onClick={() =>
@@ -298,7 +301,7 @@ const Files = () => {
       >
         <Divider orientation="left">File Name</Divider>
         <Input
-        key={"editFileName"}
+          key={"editFileName"}
           showCount
           maxLength={50}
           value={recordWillUpdate.fileName}
