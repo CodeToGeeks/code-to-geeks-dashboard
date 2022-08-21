@@ -37,6 +37,31 @@ export const signIn = createAsyncThunk(
   }
 );
 
+/*
+export const autoLogin = createAsyncThunk(
+  "auth/autoLogin",
+  async (accountData, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      let response = await axios.post("/auth/signin", accountData);
+      await handleAuthJwt(response.data.payload.token);
+      return { user: localStorage.getItem("user"), message: "succes signIn" };
+    } catch (err) {
+      let result = err.message;
+      try {
+        result =
+          err.response.data.message +
+          " with status code " +
+          JSON.stringify(err.response.status);
+      } catch (err) {}
+      return rejectWithValue({
+        message: result,
+      });
+    }
+  }
+);
+*/
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
