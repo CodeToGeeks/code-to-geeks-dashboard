@@ -1,12 +1,8 @@
 import axios from "axios";
 
 const configAxios = () => {
-  axios.defaults.baseURL = "http://157.175.208.59/api/v1/"
-  
-  // "http://localhost:4000/api/v1/";
-  
-  // "http://157.175.208.59/api/v1/"  
-  //
+  axios.defaults.baseURL = "http://13.37.123.41/api/v1/";
+
   axios.defaults.timeout = 5000;
 };
 
