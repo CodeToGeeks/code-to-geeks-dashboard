@@ -14,7 +14,7 @@ export function  uploadPostCoverImage (_id,setCoverImage) {
   const props = {
     name: "file",
   
-    action: `http://157.175.208.59/api/v1/post/cover/image/${_id}`,
+    action: `https://codetogeeks.com/api/v1/post/cover/image/${_id}`,
     
     headers: {
       "x-auth-token": localStorage.getItem("token"),
