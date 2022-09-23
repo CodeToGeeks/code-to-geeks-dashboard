@@ -20,7 +20,9 @@ export const signIn = createAsyncThunk(
     const { rejectWithValue } = thunkAPI;
     try {
       let response = await axios.post("/auth/signin", accountData);
-      await handleAuthJwt(response.data.payload.token);
+     const role =  await handleAuthJwt(response.data.payload.token);
+      if (role === "user")
+        throw Error("Invalid email.");
       return { user: localStorage.getItem("user"), message: "succes signIn" };
     } catch (err) {
       let result = err.message;
